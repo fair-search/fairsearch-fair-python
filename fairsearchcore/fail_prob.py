@@ -189,9 +189,3 @@ class MTableFailProbPair:
 
     def mass_of_mtable(self):
         return self.mtable['m'].sum()
-
-
-if __name__ == "__main__":
-    r = RecursiveNumericFailprobabilityCalculator(10, 0.2, 0.15)
-
-    print(r._find_legal_assignments_aux(8,[8], 1, 0))

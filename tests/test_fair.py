@@ -1,7 +1,7 @@
 import pytest
 
 from fairsearchcore import fair
-from fairsearchcore import simulator
+
 
 @pytest.mark.parametrize("k, p, alpha, ranking",(
                          (20, 0.25, 0.1, [0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0]),
@@ -86,19 +86,3 @@ def test_mtable_generation(k, p, alpha):
     mtable_adjusted = f_adjusted.create_unadjusted_mtable()
 
     assert mtable == mtable_adjusted  # they should be same to the 5th decimal
-
-
-if __name__ == "__main__":
-    k=20
-    p=0.25
-    alpha=0.1
-
-    f = fair.Fair(k, p, alpha)
-
-    adjusted_mtable = f.create_adjusted_mtable()
-
-    M = 10000
-
-    rankings = simulator.generate_rankings(M, k, p)
-
-    print(simulator.compute_fail_probabilty(rankings, adjusted_mtable))
