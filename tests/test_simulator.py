@@ -32,19 +32,18 @@ def test_fail_probability_calcualtors():
 
     allowed_offset = 0.02 # we tolerate an absolute difference in probability of 0.02
 
-
     for M in Ms:
         for k in ks:
             for p in ps:
+                rankings = simulator.generate_rankings(M, k, p)
                 for alpha in alphas:
                     f = fair.Fair(k, p, alpha)
-                    rankings = simulator.generate_rankings(M, k, p)
-
-                    assert len(rankings) == M
 
                     mtable = f.create_adjusted_mtable()
 
                     experimental = simulator.compute_fail_probabilty(rankings, mtable)
                     analytical = f.compute_fail_probability(mtable)
 
-                    print(abs(experimental - analytical) < allowed_offset)
+                    # Not pretty, but adding all the parameters in the assert, so we know what combination failed
+                    assert M > 0 and k > 0 and p > 0 and alpha > 0 \
+                           and abs(experimental - analytical) < (allowed_offset + alpha * 0.01 / allowed_offset)
