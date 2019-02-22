@@ -46,7 +46,8 @@ M = 10000 # number of rankings you want to generate (works better with big numbe
 
 # generate rankings using the simulator (generates M lists of k items) 
 rankings = fsc.generate_rankings(M, k, p)
->> [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],...]
+>> [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],...]
 
 # experimentally calculate the fail probability
 experimental = fsc.compute_fail_probability(mtable, rankings)
@@ -57,7 +58,7 @@ The library contains sufficient code documentation for each of the functions.
  
 ## Development
 
-1. Clone this repository `git clone https://github.com/fair-search/fairsearch-core.git`
+1. Clone this repository `git clone https://github.com/fair-search/fairsearchcore-python.git`
 2. Change directory to the directory where you cloned the repository `cd WHERE_ITS_DOWNLOADED/fairsearch-core/python`
 3. Use any IDE to work with the code
 
