@@ -9,7 +9,7 @@ pip install fairsearcore
 ```
 And, that's it!
 
-# Using it in your code
+## Using it in your code
 You need to import the package first: 
 ```{.sourceCode .python}
 import fairsearchcore as fsc
@@ -79,4 +79,4 @@ This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based o
 
 ## See also
 
-See also: [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-elasticsearch-plugin)
+You can also see the [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-elasticsearch-plugin).
