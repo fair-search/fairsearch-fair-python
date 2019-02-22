@@ -63,6 +63,12 @@ The library contains sufficient code documentation for each of the functions.
 
 ## Testing
 
+Just run:
+```
+python setup.py test 
+```
+*Note*: The simulator tests take a *looong* time to execute. 
+
 ## Credits
 
 The FA*IR algorithm is described on this paper:

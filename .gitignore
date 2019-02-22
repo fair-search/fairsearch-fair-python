@@ -8,3 +8,5 @@ tests/__pycache__/
 \.eggs/pytest_runner-4\.4-py3\.6\.egg/EGG-INFO/
 
 \.eggs/
+
+fairsearchcore\.egg-info/

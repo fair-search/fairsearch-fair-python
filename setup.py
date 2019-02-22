@@ -23,7 +23,7 @@ setup(
     tests_require=[
         'pytest>=2.8.0'
     ],
-    setup_requires=setup_requires,
+    setup_requires=['pytest-runner'],
     test_suite="tests",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
