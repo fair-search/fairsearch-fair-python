@@ -1,5 +1,11 @@
 # Fair search core for Python
 
+[![image](https://img.shields.io/pypi/status/fairsearchcore.svg)](https://pypi.org/project/fairsearchcore/)
+[![image](https://img.shields.io/pypi/v/fairsearchcore.svg)](https://pypi.org/project/fairsearchcore/)
+[![image](https://img.shields.io/pypi/pyversions/fairsearchcore.svg)](https://pypi.org/project/fairsearchcore/)
+[![image](https://img.shields.io/pypi/l/fairsearchcore.svg)](https://pypi.org/project/fairsearchcore/)
+[![image](https://img.shields.io/pypi/implementation/fairsearchcore.svg)](https://pypi.org/project/fairsearchcore/)
+
 This is the Python library with the core algorithms used to do [FA*IR](https://arxiv.org/abs/1706.06368) ranking.  
 
 ## Installation
@@ -59,7 +65,7 @@ The library contains sufficient code documentation for each of the functions.
 ## Development
 
 1. Clone this repository `git clone https://github.com/fair-search/fairsearchcore-python.git`
-2. Change directory to the directory where you cloned the repository `cd WHERE_ITS_DOWNLOADED/fairsearch-core/python`
+2. Change directory to the directory where you cloned the repository `cd WHERE_ITS_DOWNLOADED/fairsearchcore-python`
 3. Use any IDE to work with the code
 
 ## Testing

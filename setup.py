@@ -7,7 +7,7 @@ setup_requires = (
 
 setup(
     name='fairsearchcore',
-    version='0.0.2',
+    version='1.0.0',
     description='A Python library with the core algorithms used to do fair search. ',
     license='Apache 2.0',
     packages=['fairsearchcore'],
