@@ -9,5 +9,6 @@ setup(
     author='Ivan Kitanovski',
     author_email='ivan.kitanovski@gmail.com',
     keywords=['search','fairness', 'fa*ir', 'ranking', 'reranking'],
+    python_requires=">=3.0",
     url='https://github.com/fair-search/fairsearch-core',
 )
