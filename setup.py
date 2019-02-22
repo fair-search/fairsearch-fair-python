@@ -1,14 +1,13 @@
-import sys
 from setuptools import setup
 
-setup_requires = (
-    ['pytest-runner'] if any(x in sys.argv for x in ('pytest', 'test', 'ptr')) else []
-)
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
     name='fairsearchcore',
-    version='1.0.0',
+    version='1.0.1',
     description='A Python library with the core algorithms used to do fair search. ',
+    long_description=long_description,
     license='Apache 2.0',
     packages=['fairsearchcore'],
     author='Ivan Kitanovski',
