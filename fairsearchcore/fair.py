@@ -15,21 +15,16 @@ from fairsearchcore import re_ranker
 
 
 class Fair:
-
-    k = 10  # the total number of elements
-    p = 0.2  # the proportion of protected candidates in the top-k ranking
-    alpha = 0.1  # the significance level
-
-    _cache = {} # stores generated mtables in memory
-
     def __init__(self, k: int, p: float, alpha: float):
         # check the parameters first
         _validate_basic_parameters(k, p, alpha)
 
         # assign the parameters
-        self.k = k
-        self.p = p
-        self.alpha = alpha
+        self.k = k # the total number of elements
+        self.p = p # the proportion of protected candidates in the top-k ranking
+        self.alpha = alpha # the significance level
+
+        self. _cache = {}  # stores generated mtables in memory
 
     def create_unadjusted_mtable(self):
         """

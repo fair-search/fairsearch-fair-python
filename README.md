@@ -43,7 +43,7 @@ mtable = fair.create_adjusted_mtable()
 
 # again, analytically calculate the fail probability
 analytical = fair.compute_fail_probability(mtable)
->> 0.13421772800000065
+>> 0.10515247355215251
 
 ```
 Generate random rankings and analyze them:
@@ -61,8 +61,8 @@ rankings = fsc.generate_rankings(M, k, p)
  <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>],...]
 
 # experimentally calculate the fail probability
-experimental = fsc.compute_fail_probability(mtable, rankings)
->> 0.1076
+experimental = fsc.compute_fail_probability(rankings, mtable)
+>> 0.1025
 ```
 Apply a fair re-ranking to a given ranking:
 ```
