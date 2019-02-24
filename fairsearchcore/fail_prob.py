@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
+fairsearchcore.fail_prob
+~~~~~~~~~~~~~~~
 Contains the classes to analytically compute fail probability
 """
 
@@ -10,7 +12,7 @@ from fairsearchcore import mtable_generator
 
 EPS = 0.0000000000000001
 
-class FailprobabilityCalculator(abc.ABC):
+class FailProbabilityCalculator(abc.ABC):
     """
     Base class for the fail probability calculation
     """
@@ -34,7 +36,7 @@ class FailprobabilityCalculator(abc.ABC):
         return self.pmf_cache[key]
 
 
-class RecursiveNumericFailprobabilityCalculator(FailprobabilityCalculator):
+class RecursiveNumericFailProbabilityCalculator(FailProbabilityCalculator):
     """
     Recursive calculation of fail probability
     """

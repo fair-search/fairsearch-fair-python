@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
+fairsearchcore.mtable_generator
+~~~~~~~~~~~~~~~
 Contains the mechanics for creating an mtable
 """
 
@@ -12,7 +14,7 @@ from fairsearchcore import fail_prob
 
 class MTableGenerator:
 
-    def __init__(self, k: int, p: float, alpha: float, adjust_alpha: bool):
+    def __init__(self, k, p, alpha, adjust_alpha):
         # assign parameters
         self.k = k
         self.p = p
@@ -20,20 +22,20 @@ class MTableGenerator:
         self.adjust_alpha = adjust_alpha
 
         if self.adjust_alpha:
-            fail_prob_pair = fail_prob.RecursiveNumericFailprobabilityCalculator(k, p, alpha).adjust_alpha()
+            fail_prob_pair = fail_prob.RecursiveNumericFailProbabilityCalculator(k, p, alpha).adjust_alpha()
             self.adjusted_alpha = fail_prob_pair.alpha
             self._mtable = fail_prob_pair.mtable
         else:
             self.adjusted_alpha = alpha
             self._mtable = self._compute_mtable()
 
-    def mtable_as_list(self) -> list:
+    def mtable_as_list(self):
         return [int(i) for i in self._mtable.m.tolist()]
 
-    def mtable_as_dataframe(self) -> pd.DataFrame:
+    def mtable_as_dataframe(self):
         return self._mtable
 
-    def m(self, k: int) -> int:
+    def m(self, k):
         if k < 1:
             raise ValueError("Parameter k must be at least 1")
         elif k > self.k:
@@ -54,7 +56,7 @@ class MTableGenerator:
         return mtable
 
 
-def compute_aux_mtable(mtable: pd.DataFrame) -> pd.DataFrame:
+def compute_aux_mtable(mtable):
     """
     Stores the inverse of an mTable entry and the size of the block with respect to the inverse
     """
@@ -75,9 +77,3 @@ def compute_aux_mtable(mtable: pd.DataFrame) -> pd.DataFrame:
             raise RuntimeError("Inconsistent mtable")
 
     return aux_mtable
-
-
-if __name__ == "__main__":
-    mt = MTableGenerator(10, 0.2, 0.15, False)
-
-    print(mt.mtable_as_dataframe())

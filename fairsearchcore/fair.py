@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 
 """
+fairsearchcore.fair
+~~~~~~~~~~~~~~~
 This module serves as a wrapper around the utilities we have created for FA*IR ranking
 """
+
 import pandas as pd
 import warnings
 
 from fairsearchcore import mtable_generator
 from fairsearchcore import fail_prob
+from fairsearchcore import re_ranker
 
 
 class Fair:
@@ -15,6 +19,8 @@ class Fair:
     k = 10  # the total number of elements
     p = 0.2  # the proportion of protected candidates in the top-k ranking
     alpha = 0.1  # the significance level
+
+    _cache = {} # stores generated mtables in memory
 
     def __init__(self, k: int, p: float, alpha: float):
         # check the parameters first
@@ -25,42 +31,47 @@ class Fair:
         self.p = p
         self.alpha = alpha
 
-    def create_unadjusted_mtable(self) -> list:
+    def create_unadjusted_mtable(self):
         """
         Creates an mtable using alpha unadjusted
         :return:
         """
         return self._create_mtable(self.alpha, False)
 
-    def create_adjusted_mtable(self) -> list:
+    def create_adjusted_mtable(self):
         """
         Creates an mtable using alpha adjusted
         :return:
         """
         return self._create_mtable(self.alpha, True)
 
-    def _create_mtable(self, alpha: int, adjust_alpha: bool) -> list:
+    def _create_mtable(self, alpha, adjust_alpha):
         """
         Creates an mtable by using the passed alpha value
         :param alpha:           The significance level
         :param adjust_alpha:    Boolean indicating whether the alpha be adjusted or not
         :return:
         """
-        # check if passed alpha is ok
-        _validate_alpha(alpha)
 
-        # create the mtable
-        fc = mtable_generator.MTableGenerator(self.k, self.p, alpha, adjust_alpha)
+        if not (self.k, self.p, self.alpha, adjust_alpha) in self._cache:
+            # check if passed alpha is ok
+            _validate_alpha(alpha)
 
-        # return as list
-        return fc.mtable_as_list()
+            # create the mtable
+            fc = mtable_generator.MTableGenerator(self.k, self.p, alpha, adjust_alpha)
 
-    def adjust_alpha(self):
+            # store as list
+            self._cache[(self.k, self.p, self.alpha, adjust_alpha)] = fc.mtable_as_list()
+
+        # return from cache
+        return self._cache[(self.k, self.p, self.alpha, adjust_alpha)]
+
+    def adjust_alpha(self) :
         """
         Computes the alpha adjusted for the given set of parameters
         :return:
         """
-        rnfpc = fail_prob.RecursiveNumericFailprobabilityCalculator(self.k, self.p, self.alpha)
+        rnfpc = fail_prob.RecursiveNumericFailProbabilityCalculator(self.k, self.p, self.alpha)
         fpp = rnfpc.adjust_alpha()
         return fpp.alpha
 
@@ -72,7 +83,7 @@ class Fair:
         if len(mtable) != self.k:
             raise ValueError("Number of elements k and mtable length must be equal!")
 
-        rnfpc = fail_prob.RecursiveNumericFailprobabilityCalculator(self.k, self.p, self.alpha)
+        rnfpc = fail_prob.RecursiveNumericFailProbabilityCalculator(self.k, self.p, self.alpha)
 
         mtable_df = pd.DataFrame(columns=["m"])
 
@@ -82,21 +93,54 @@ class Fair:
 
         return rnfpc.calculate_fail_probability(mtable_df)
 
-    def is_fair(self, ranking: list) -> bool:
+    def is_fair(self, ranking):
         """
         Checks if the ranking is fair for the given parameters
-        :param ranking:     The ranking to be checked
+        :param ranking:     The ranking to be checked (list of FairScoreDoc)
         :return:
         """
         return check_ranking(ranking, self.create_adjusted_mtable())
 
+    def re_rank(self, ranking):
+        """
+        Applies FA*IR re-ranking to the input ranking with an adjusted mtable
+        :param ranking:     The ranking to be re-ranked (list of FairScoreDoc)
+        :return:
+        """
+        return self._re_rank(ranking, True)
 
-def check_ranking(ranking:list, mtable: list) -> bool:
+    def _re_rank_unadjusted(self, ranking):
+        """
+        Applies FA*IR re-ranking to the input ranking with an unadjusted mtable
+        :param ranking:     The ranking to be re-ranked (list of FairScoreDoc)
+        :return:
+        """
+        return self._re_rank(ranking, False)
+
+    def _re_rank(self, ranking, adjust):
+        """
+        Applies FA*IR re-ranking to the input ranking and boolean whether to use an adjusted mtable
+        :param ranking:     The ranking to be re-ranked (list of FairScoreDoc)
+        :return:
+        """
+        protected = []
+        non_protected = []
+        for item in ranking:
+            if item.is_protected:
+                protected.append(item)
+            else:
+                non_protected.append(item)
+
+        return re_ranker.fair_top_k(self.k, protected, non_protected,
+                                    self.create_adjusted_mtable() if adjust else self.create_unadjusted_mtable())
+
+
+def check_ranking(ranking, mtable):
     """
     Checks if the ranking is fair in respect to the mtable
-    :param ranking:     The ranking to be checked
-    :param mtable:      The mtable against to check
-    :return:            Returns whether the rankings statisfies the mtable
+    :param ranking:     The ranking to be checked (list of FairScoreDoc)
+    :param mtable:      The mtable against to check (list of int)
+    :return:            Returns whether the rankings satisfies the mtable
     """
     count_protected = 0
 
@@ -106,13 +150,13 @@ def check_ranking(ranking:list, mtable: list) -> bool:
 
     # check number of protected element at each rank
     for i, element in enumerate(ranking):
-        count_protected += 1 if element == 1 else 0
+        count_protected += 1 if element.is_protected == 1 else 0
         if count_protected < mtable[i]:
             return False
     return True
 
 
-def _validate_basic_parameters(k: int, p: float, alpha: float):
+def _validate_basic_parameters(k, p, alpha):
     """
     Validates if k, p and alpha are in the required ranges
     :param k:           Total number of elements (above or equal to 10)
@@ -135,7 +179,7 @@ def _validate_basic_parameters(k: int, p: float, alpha: float):
     _validate_alpha(alpha)
 
 
-def _validate_alpha(alpha: float):
+def _validate_alpha(alpha):
     if alpha < 0.01 or alpha > 0.15:
         if alpha < 0.001 or alpha > 0.5:
             raise ValueError("The significance level `alpha` must be between 0.01 and 0.15")

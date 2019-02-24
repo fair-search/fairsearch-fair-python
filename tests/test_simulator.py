@@ -20,7 +20,7 @@ def test_generate_rankings(M, k, p, result):
 
     # check if the number of protected elements is right
     total = M * k
-    protected = sum([sum(r) for r in rankings])
+    protected = sum([sum([1 if rr.is_protected else 0 for rr in r]) for r in rankings])
     assert abs((protected * 1.0 / total) - p) < allowed_offset
 
 
@@ -41,9 +41,9 @@ def test_fail_probability_calcualtors():
 
                     mtable = f.create_adjusted_mtable()
 
-                    experimental = simulator.compute_fail_probabilty(rankings, mtable)
+                    experimental = simulator.compute_fail_probability(rankings, mtable)
                     analytical = f.compute_fail_probability(mtable)
 
-                    # Not pretty, but adding all the parameters in the assert, so we know what combination failed
+                    # Not pretty, but adding all the parameters in the assert, so we know what combination fails
                     assert M > 0 and k > 0 and p > 0 and alpha > 0 \
                            and abs(experimental - analytical) < (allowed_offset + alpha * 0.01 / allowed_offset)

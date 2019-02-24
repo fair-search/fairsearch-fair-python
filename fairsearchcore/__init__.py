@@ -15,7 +15,7 @@ is at https://github.com/fair-search/fairsearch-core/tree/master/python.
 :license: Apache 2.0, see LICENSE for more details.
 """
 from .fair import check_ranking, Fair
-from .simulator import compute_fail_probabilty, generate_rankings
+from .simulator import compute_fail_probability, generate_rankings
 
 # Set default logging handler to avoid "No handler found" warnings.
 import logging

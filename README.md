@@ -50,14 +50,43 @@ Generate random rankings and analyze them:
 ```{.sourceCode .python}
 M = 10000 # number of rankings you want to generate (works better with big numbers)
 
-# generate rankings using the simulator (generates M lists of k items) 
+# generate rankings using the simulator (generates M lists of k objects of class fairsearchcore.models.FairScoreDoc) 
 rankings = fsc.generate_rankings(M, k, p)
->> [[0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0], 
-[0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],...]
+>> [[<FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>, 
+<FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, 
+ <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+ <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>],...]
 
 # experimentally calculate the fail probability
 experimental = fsc.compute_fail_probability(mtable, rankings)
 >> 0.1076
+```
+Apply a fair re-ranking to a given ranking:
+```
+# import the FairScoreDoc class
+from fairsearchcore.models import FairScoreDoc
+
+# let's manually create an unfair ranking (False -> unprotexted, True -> protected)
+unfair_ranking = [FairScoreDoc(20, 20, False), FairScoreDoc(19, 19, False), FairScoreDoc(18, 18, False),
+                      FairScoreDoc(17, 17, False), FairScoreDoc(16, 16, False), FairScoreDoc(15, 15, False),
+                      FairScoreDoc(14, 14, False), FairScoreDoc(13, 13, False), FairScoreDoc(12, 12, False),
+                      FairScoreDoc(11, 11, False), FairScoreDoc(10, 10, False), FairScoreDoc(9, 9, False),
+                      FairScoreDoc(8, 8, False), FairScoreDoc(7, 7, False), FairScoreDoc(6, 6, True),
+                      FairScoreDoc(5, 5, True), FairScoreDoc(4, 4, True), FairScoreDoc(3, 3, True),
+                      FairScoreDoc(2, 2, True), FairScoreDoc(1, 1, True)]
+
+# now re-rank the unfair ranking                    
+fair.re_rank(unfair_ranking)
+>> [<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
+<FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>,
+<FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>, 
+<FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>]
 ```
 
 The library contains sufficient code documentation for each of the functions.
