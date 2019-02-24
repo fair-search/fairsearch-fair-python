@@ -50,7 +50,7 @@ Generate random rankings and analyze them:
 ```{.sourceCode .python}
 M = 10000 # number of rankings you want to generate (works better with big numbers)
 
-# generate rankings using the simulator (generates M lists of k objects of class fairsearchcore.models.FairScoreDoc) 
+# generate rankings using the simulator (M lists of k objects of class fairsearchcore.models.FairScoreDoc) 
 rankings = fsc.generate_rankings(M, k, p)
 >> [[<FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Protected]>, 
 <FairScoreDoc [Protected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, 
