@@ -150,7 +150,7 @@ def check_ranking(ranking, mtable):
 
     # check number of protected element at each rank
     for i, element in enumerate(ranking):
-        count_protected += 1 if element.is_protected == 1 else 0
+        count_protected += 1 if element.is_protected else 0
         if count_protected < mtable[i]:
             return False
     return True

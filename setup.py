@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='fairsearchcore',
-    version='1.0.2',
+    version='1.0.3',
     description='A Python library with the core algorithms used to do fair search. ',
     long_description=long_description,
     license='Apache 2.0',
