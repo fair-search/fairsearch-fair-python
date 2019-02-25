@@ -100,7 +100,7 @@ The library contains sufficient code documentation for each of the functions.
 ## Testing
 
 Just run:
-```bash
+```
 python setup.py test 
 ```
 *Note*: The simulator tests take a *looong* time to execute. 
