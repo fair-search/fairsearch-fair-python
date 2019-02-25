@@ -17,11 +17,11 @@ And, that's it!
 
 ## Using it in your code
 You need to import the package first: 
-```{.sourceCode .python}
+```python
 import fairsearchcore as fsc
 ```
 Creating and analyzing mtables:
-```{.sourceCode .python}
+```python
 k = 20 # number of topK elements returned (value should be between 10 and 400)
 p = 0.25 # proportion of protected candidates in the topK elements (value should be between 0.02 and 0.98) 
 alpha = 0.1 # significance level (value should be between 0.01 and 0.15)
@@ -69,7 +69,7 @@ Apply a fair re-ranking to a given ranking:
 # import the FairScoreDoc class
 from fairsearchcore.models import FairScoreDoc
 
-# let's manually create an unfair ranking (False -> unprotexted, True -> protected)
+# let's manually create an unfair ranking (False -> unprotected, True -> protected)
 unfair_ranking = [FairScoreDoc(20, 20, False), FairScoreDoc(19, 19, False), FairScoreDoc(18, 18, False),
                       FairScoreDoc(17, 17, False), FairScoreDoc(16, 16, False), FairScoreDoc(15, 15, False),
                       FairScoreDoc(14, 14, False), FairScoreDoc(13, 13, False), FairScoreDoc(12, 12, False),
@@ -115,4 +115,5 @@ This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based o
 
 ## See also
 
-You can also see the [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-elasticsearch-plugin).
+You can also see the [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-elasticsearch-plugin)
+and and [FA*IR search core Java library](https://github.com/fair-search/fairsearchcore-java).
