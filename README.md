@@ -47,7 +47,7 @@ analytical = fair.compute_fail_probability(mtable)
 
 ```
 Generate random rankings and analyze them:
-```{.sourceCode .python}
+```python
 M = 10000 # number of rankings you want to generate (works better with big numbers)
 
 # generate rankings using the simulator (M lists of k objects of class fairsearchcore.models.FairScoreDoc) 
@@ -65,7 +65,7 @@ experimental = fsc.compute_fail_probability(rankings, mtable)
 >> 0.1025
 ```
 Apply a fair re-ranking to a given ranking:
-```
+```python
 # import the FairScoreDoc class
 from fairsearchcore.models import FairScoreDoc
 
@@ -100,7 +100,7 @@ The library contains sufficient code documentation for each of the functions.
 ## Testing
 
 Just run:
-```
+```bash
 python setup.py test 
 ```
 *Note*: The simulator tests take a *looong* time to execute. 
