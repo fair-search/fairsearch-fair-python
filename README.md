@@ -103,8 +103,8 @@ Just run:
 ```
 python setup.py test 
 ```
-*Note*: The simulator tests take a *looong* time to execute. 
-
+*Note*: The simulator tests take a *looong* time to execute. Also, because there is a *randomness* factor involved in 
+the tests, it can happen that (rarely) they fail sometimes.
 ## Credits
 
 The FA*IR algorithm is described on this paper:
