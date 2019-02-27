@@ -64,6 +64,12 @@ rankings = fsc.generate_rankings(M, k, p)
 experimental = fsc.compute_fail_probability(rankings, mtable)
 >> 0.1025
 ```
+Let's get the alpha adjusted (used to create an adjusted mtable)
+```python
+# get alpha adjusted
+alpha_adjusted = fair.adjust_alpha()
+>> 0.07812500000000001
+```
 Apply a fair re-ranking to a given ranking:
 ```python
 # import the FairScoreDoc class
