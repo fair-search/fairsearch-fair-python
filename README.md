@@ -11,7 +11,7 @@ This is the Python library with the core algorithms used to do [FA*IR](https://a
 ## Installation
 To install `fairsearchcore`, simply use `pip` (or `pipenv`):
 ```bash
-pip install fairsearcore
+pip install fairsearchcore
 ```
 And, that's it!
 
