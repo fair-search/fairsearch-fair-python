@@ -83,6 +83,10 @@ unfair_ranking = [FairScoreDoc(20, 20, False), FairScoreDoc(19, 19, False), Fair
                       FairScoreDoc(8, 8, False), FairScoreDoc(7, 7, False), FairScoreDoc(6, 6, True),
                       FairScoreDoc(5, 5, True), FairScoreDoc(4, 4, True), FairScoreDoc(3, 3, True),
                       FairScoreDoc(2, 2, True), FairScoreDoc(1, 1, True)]
+                      
+# let's check the ranking is considered fair
+fair.is_fair(unfair_ranking)
+>> False
 
 # now re-rank the unfair ranking                 
 re_ranked = fair.re_rank(unfair_ranking)
@@ -93,6 +97,11 @@ re_ranked = fair.re_rank(unfair_ranking)
 <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>, <FairScoreDoc [Nonprotected]>,
 <FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>, 
 <FairScoreDoc [Protected]>, <FairScoreDoc [Protected]>]
+
+# now let's see if the new ranking is fair
+fair.is_fair(re_ranked)
+>> True
+
 ```
 
 The library contains sufficient code documentation for each of the functions.
