@@ -76,6 +76,7 @@ Apply a fair re-ranking to a given ranking:
 from fairsearchcore.models import FairScoreDoc
 
 # let's manually create an unfair ranking (False -> unprotected, True -> protected)
+# in this example the first document (docid=20) has a score of 20, the last document (docid=1) a score of 1
 unfair_ranking = [FairScoreDoc(20, 20, False), FairScoreDoc(19, 19, False), FairScoreDoc(18, 18, False),
                       FairScoreDoc(17, 17, False), FairScoreDoc(16, 16, False), FairScoreDoc(15, 15, False),
                       FairScoreDoc(14, 14, False), FairScoreDoc(13, 13, False), FairScoreDoc(12, 12, False),
