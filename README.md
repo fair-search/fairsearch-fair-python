@@ -127,7 +127,7 @@ The FA*IR algorithm is described on this paper:
 
 * Meike Zehlike, Francesco Bonchi, Carlos Castillo, Sara Hajian, Mohamed Megahed, Ricardo Baeza-Yates: "[FA*IR: A Fair Top-k Ranking Algorithm](https://doi.org/10.1145/3132847.3132938)". Proc. of the 2017 ACM on Conference on Information and Knowledge Management (CIKM).
 
-This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based on the paper. See the [license](https://github.com/fair-search/fairsearchcore-python/blob/master/LICENSE) file for more information.
+This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based on the paper. See the [license](https://github.com/fair-search/fairsearchcore-python/blob/master/LICENSE) file for more information. For any questions contact [Mieke Zehlike].(https://de.linkedin.com/in/meike-zehlike-366bba131)
 
 ## See also
 
