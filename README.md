@@ -131,5 +131,5 @@ This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based o
 
 ## See also
 
-You can also see the [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-elasticsearch-plugin)
-and and [FA*IR search core Java library](https://github.com/fair-search/fairsearchcore-java).
+You can also see the [FA*IR plug-in for ElasticSearch](https://github.com/fair-search/fairsearch-fair-for-elasticsearch)
+and and [FA*IR search core Java library](https://github.com/fair-search/fairsearch-fair-java).
