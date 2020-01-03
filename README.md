@@ -129,7 +129,7 @@ The FA*IR algorithm is described on this paper:
 
 This code was developed by [Ivan Kitanovski](http://ivankitanovski.com/) based on the paper. See the [license](https://github.com/fair-search/fairsearch-fair-python/blob/master/LICENSE) file for more information. 
 
-For any questions contact [Mieke Zehlike](https://de.linkedin.com/in/meike-zehlike-366bba131)
+For any questions contact [Meike Zehlike](https://de.linkedin.com/in/meike-zehlike-366bba131)
 
 ## See also
 
